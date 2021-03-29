@@ -6,7 +6,7 @@ using CretaceousPark.Models;
 
 namespace CretaceousPark.Controllers
 {
-  [Route("api/[controller")]
+  [Route("api/[controller]")]
   [ApiController]
   public class AnimalsController : ControllerBase
   {
@@ -26,6 +26,16 @@ namespace CretaceousPark.Controllers
       _db.Animals.Add(animal);
       await _db.SaveChangesAsync();
       return CreatedAtAction("Post", new { id = animal.AnimalId}, animal);
+    }
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Animal>> GetAnimal(int id)
+    {
+      var animal = await _db.Animals.FindAsync(id);
+      if(animal == null)
+      {
+        return NotFound();
+      }
+      return animal;
     }
   }
 }
