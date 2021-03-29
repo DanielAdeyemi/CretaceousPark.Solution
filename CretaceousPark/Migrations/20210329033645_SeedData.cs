@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CretaceousPark.Migrations
 {
-    public partial class Initial : Migration
+    public partial class SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,12 +15,24 @@ namespace CretaceousPark.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     Species = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    age = table.Column<int>(type: "int", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Animals", x => x.AnimalId);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Animals",
+                columns: new[] { "AnimalId", "Age", "Gender", "Name", "Species" },
+                values: new object[,]
+                {
+                    { 1, 7, "Female", "Matilda", "Woolly Mammoth" },
+                    { 3, 10, "Female", "Rexie", "Dinosaur" },
+                    { 4, 2, "Female", "Matilda", "Dinosaur" },
+                    { 5, 4, "Male", "Pip", "Shark" },
+                    { 6, 22, "Male", "Bartholomew", "Dinosaur" }
                 });
         }
 
