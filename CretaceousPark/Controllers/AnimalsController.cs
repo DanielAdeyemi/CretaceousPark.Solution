@@ -35,7 +35,7 @@ namespace CretaceousPark.Controllers
       {
         return NotFound();
       }
-      return animal;
+      return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId}, animal);
     }
   }
 }
